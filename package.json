@@ -1,0 +1,24 @@
+{
+  "name": "ecommerce",
+  "version": "1.0.0",
+  "description": "backend Api to create an ecommerce website ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pro-Major/EcommerceAPI.git"
+  },
+  "author": "Major",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pro-Major/EcommerceAPI/issues"
+  },
+  "homepage": "https://github.com/pro-Major/EcommerceAPI#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.11.13",
+    "nodemon": "^2.0.7"
+  }
+}
