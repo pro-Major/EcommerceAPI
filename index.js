@@ -1,10 +1,17 @@
+//importing done here 
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const Products = require('./routes/products')
 const Orders = require('./routes/order')
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
+// end importing 
+
+
+//Inbuilt Middle ware 
+app.use(express.json())
+app.use(morgan('dev'));  
+
+//end Inbuilt Middle ware 
 
 
 
@@ -12,9 +19,7 @@ const mongoose = require('mongoose');
 
 
 
-
-
-//I still dont know why it is being used
+//I still dont know why it is being used // Are bhai ye hai kya 
 app.use((req,res,next)=> {
     res.header("Access-Control-Allow-Origin","*");
     res.header("Acess-Control-Allow-Headers","Origin, X-Requested-with,Content-Types,Accept,Authorization"
@@ -26,16 +31,38 @@ app.use((req,res,next)=> {
     next();
 });
 // !!!! Stile dont know why it is being used, according to the youtuber it prevents CORS errors.
-app.use(morgan('dev'));  
-// it did not worked dont know why 
-// app.use(bodyParser.urlencoded({extended: false}));
-// app.use(bodyParser.json());
-app.use(express.json())
+
+
+
+
+
+
+
+
 
 //Handling Requests for the routes 
 app.use('/products', Products);
 app.use('/orders', Orders)
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Error Handling 
 app.use((req,res,next)=> {
     const error = new Error('Jo Aap dhund rahe hai vo nahi mila hume');
     error.status= 404;
@@ -50,4 +77,10 @@ app.use((error,req,res,next)=> {
         }
     })
 })
+// End Error Handling 
+
+
+
+
+//Export
 module.exports = app; 
