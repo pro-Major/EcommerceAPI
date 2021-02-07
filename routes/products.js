@@ -5,12 +5,36 @@ const router = express.Router();
 
 
 router.get("/",(req,res,next)=> {
-    if(true) {
-            Product.find()
-            .then(doc=> {res.status(200).json(doc)})
-            .catch(err=> {console.log(`error mila bhai ${err} `)})
+    Product.find()
+    .select("name price id")
+    .exec()
+    .then(doc=> {
+        const response = {
+            count: doc.length,
+            products : doc.map(doc=> {
+                return {
+                    
+                    name : doc.name,
+                    price: doc.price,
+                    id : doc.id,
+                        request: {
+                            type : 'GET',
+                            url : `http://localhost:3200/products/`+doc.id
+                        }
 
-    }
+                }
+
+            })
+        }
+        res.status(200).json(response);
+    })
+    
+    // if(true) {
+    //         Product.find()
+    //         .then(doc=> {res.status(200).json(doc)})
+    //         .catch(err=> {console.log(`error mila bhai ${err} `)})
+
+    // }
 })
 
 router.get("/:Pid",(req,res, next)=> {
@@ -39,11 +63,12 @@ router.post('/',(req,res,next)=> {
 
 
 router.delete('/:id', (req,res) => {
-
 Product.findByIdAndRemove(req.params.id)
 .then((results)=> {res.status(200).json(`sucessfully removed` + results)})
 .catch(err=> {res.status(500).json({error : err})})
 });
+
+
 
 
 
