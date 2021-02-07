@@ -7,9 +7,6 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 
-//DataBase Connection 
-mongoose.connect('')
-
 
 
 
